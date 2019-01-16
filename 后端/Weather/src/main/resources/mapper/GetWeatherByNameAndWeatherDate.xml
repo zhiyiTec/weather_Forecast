@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.boot.zhiyi.mapper.GetWeatherByNameAndWeatherDate">
+	<select id="getWeatherByNameAndWeatherDate" parameterType="com.boot.zhiyi.model.Weather" resultType="com.boot.zhiyi.model.Weather">
+		select * from
+		weather where cityName=#{cityName}  and weatherDate=#{weatherDate}
+	</select>
+</mapper>

@@ -1,0 +1,123 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!doctype html>
+<html>
+
+<head>
+
+    <script src="js/jquery-2.1.4.min.js"></script>
+    测试界面
+    <h5><span id="1DayDate">September 24 , 2017</span></h5>
+    <h5><span id="2DayDate">September 25 , 2017</span></h5>
+</head>
+
+<body>
+
+    <script>
+        var cityName = "南京";
+        var temptureArr = new Array(); //用于存储天气温度
+        var weatherConditionArr = new Array(); //用于存储天气状况
+        var dateArry = new Array(); //用于存储日期
+        $.ajax({
+            url: "http://localhost:12305/zhiyi/getWeather",
+            type: "get",
+            data: "cityName=" + cityName,
+            success: function(data) {
+                temptAr = [];
+                weatherConditionArr = [];
+                $.each(data.weathers, function(index, item) {
+                        var getDay = item.weatherDate.substring(0, 2);
+                        if (judgeSafeData(getDay)) {
+                            temptureArr.push(item.weatherTempture);
+                            weatherConditionArr.push(item.weatherCondition)
+                        }
+                    }),
+                    console.log(weatherConditionArr)
+                    //将温度添加到界面
+                addWeatherToPage(temptureArr, "DayTempture");
+                //将天气状态添加到界面
+                addWeatherToPage(weatherConditionArr, "DayWeatherCondition");
+
+                dateArry = [];
+                //将日期存到数组中
+                getData(dateArry);
+                //将日期状态添加到界面
+                addWeatherToPage(dateArry, "DayDate");
+            },
+            error: function() {
+                alert("天气资源获取失败")
+            }
+        });
+
+        //用于判断日期是否合法
+        function judgeSafeData(getDay) {
+            var myDate = new Date();
+            var today = myDate.getDate();
+            var LargeData = today + 4;
+            if (today <= getDay && LargeData > getDay) {
+                return true;
+            } else {
+                return false
+            };
+        }
+        //用于将天气添加至页面
+        function addWeatherToPage(arry, signal) {
+            $.each(arry, function(index, item) {
+                var nu = index + 1;
+                $("#" + nu + signal).text("");
+                $("#" + nu + signal).text(arry[index]);
+            })
+        }
+        //用于获取当前的年月日，并将日期添加至对应的界面
+        function getData(arry) {
+            // 获取当前日期
+            var date = new Date();
+            for (var i = 0; i < 4; i++) {
+                console.log("------------------------");
+                //获取当前的年份
+                var nowYear = date.getFullYear();
+                //console.log("年份=" + nowYear);
+                // 获取当前月份
+                var nowMonth = date.getMonth() + 1;
+                //console.log("月份=" + nowMonth);
+                // 获取当前是几号
+                var strDate = date.getDate() + i;
+                if (nowMonth == 1 || nowMonth == 3 || nowMonth == 5 || nowMonth == 7 || nowMonth == 8 || nowMonth == 10 || nowMonth == 12) {
+                    if (strDate > 31) {
+                        nowMonth += 1;
+                    }
+                } else if (nowMonth == 2 && nowYear % 4 == 0) {
+                    if (strDate > 28) {
+                        nowMonth += 1;
+                    }
+                } else if (nowMonth == 2 && nowYear % 4 != 0) {
+                    if (strDate > 27) {
+                        nowMonth += 1;
+                    }
+                } else {
+                    if (strDate > 30) {
+                        nowMonth += 1;
+                    }
+                }
+                //console.log("日期=" + strDate);
+
+                // 添加分隔符“-”
+                var seperator = "-";
+                // 对月份进行处理，1-9月在前面添加一个“0”
+                if (nowMonth >= 1 && nowMonth <= 9) {
+                    nowMonth = "0" + nowMonth;
+                }
+                // 最后拼接字符串，得到一个格式为(yyyy-MM-dd)的日期
+                var nowDate = nowYear + seperator + nowMonth + seperator + strDate;
+                // console.log(nowDate);
+                arry.push(nowDate);
+            }
+        }
+    </script>
+</body>
+
+</html>
