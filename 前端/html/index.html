@@ -22,7 +22,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <link href="css/font-awesome.css" rel="stylesheet">
     <!-- //font-awesome icons -->
     <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-    <script src="js/jquery-2.1.4.min.js"></script>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="js/jQueryRotate.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!--引入boootBox-->
+    <script src="https://cdn.bootcss.com/bootbox.js/4.4.0/bootbox.js"></script>
     <script type="text/javascript">
         $(function() {
 
@@ -46,81 +55,92 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </head>
 
 <body>
-    <div class="content" id="Main-Content">
-        <h1><span style="font-family:STXingkai">致一天气</span></h1>
-        <div class="w3ls-slider">
-            <div class="hub-slider">
-                <div class="hub-slider-slides">
-                    <ul>
-                        <li>
-                            <div class="w3layouts-info w3layouts-info3">
-                                <div class="w3layouts-info-top">
-                                    <h3><span id="1DayTempture">22°c<span></h3>
-                                    <h4><span id="1DayWeatherCondition">Sunny</span></h4>
-                                        <p>江苏南京</p>
-                                </div>
-                                <canvas id="partly-cloudy-day" width="40" height="40"></canvas>
-                                <div class="w3layouts-info-bottom">
-                                    <h5><span id="1DayDate">September 24 , 2017</span></h5>
-                                    <p><span id="1week"></span></p>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="w3layouts-info w3layouts-info2">
-                                <div class="w3layouts-info-top">
-                                    <h3><span id="2DayTempture">20°c</span></h3>
-                                    <h4><span id="2DayWeatherCondition">Cloudy</span></h4>
-                                    <p>江苏南京</p>
-                                </div>
-                                <canvas id="cloudy" width="40" height="40"></canvas>
-                                <div class="w3layouts-info-bottom">
-                                    <h5><span id="2DayDate">September 25 , 2017</span></h5>
-                                    <p><span id="2week"></span></p>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="w3layouts-info">
-                                <div class="w3layouts-info-top">
-                                    <h3><span id="3DayTempture">17°c</span></h3>
-                                    <h4><span id="3DayWeatherCondition">Rainy</span></h4>
-                                    <p>江苏南京</p>
-                                </div>
-                                <canvas id="rain" width="40" height="40"></canvas>
-                                <div class="w3layouts-info-bottom">
-                                    <h5><span id="3DayDate">September 25 , 2017</span></h5>
-                                    <p><span id="3week"></span></p>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="w3layouts-info w3layouts-info1">
-                                <div class="w3layouts-info-top">
-                                    <h3><span id="4DayTempture">-5°c</span></h3>
-                                    <h4><span id="4DayWeatherCondition">Snowy</span></h4>
-                                    <p>江苏南京</p>
-                                </div>
-                                <canvas id="snow" width="40" height="40"></canvas>
-                                <div class="w3layouts-info-bottom">
-                                    <h5><span id="4DayDate">September 25 , 2017</span></h5>
-                                    <p><span id="4week"></span></p>
-                                </div>
-                            </div>
 
-                        </li>
-                    </ul>
-                </div>
-                <div class="hub-slider-controls">
-                    <button class="hub-slider-arrow hub-slider-arrow_next">↑</button>
-                    <button class="hub-slider-arrow hub-slider-arrow_prev">↓</button>
+    <div class="container">
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="#">Home</a></li>
+            <li role="presentation"><a href="#">Profile</a></li>
+            <li role="presentation"><a href="#">Messages</a></li>
+            <li role="presentation" class="navbar-right"><a href="#" id="refresh"><span class="glyphicon glyphicon-refresh"
+                    aria-hidden="true"></span></a></li>
+        </ul>
+        <div class="content" id="Main-Content">
+            <h1><span style="font-family:STXingkai">致一天气</span></h1>
+            <div class="w3ls-slider">
+                <div class="hub-slider">
+                    <div class="hub-slider-slides">
+                        <ul>
+                            <li>
+                                <div class="w3layouts-info w3layouts-info3">
+                                    <div class="w3layouts-info-top">
+                                        <h3><span id="1DayTempture">22°c<span></h3>
+                                    <h4><span id="1DayWeatherCondition">Sunny</span></h4>
+                                            <p>江苏南京</p>
+                                    </div>
+                                    <canvas id="partly-cloudy-day" width="40" height="40"></canvas>
+                                    <div class="w3layouts-info-bottom">
+                                        <h5><span id="1DayDate">September 24 , 2017</span></h5>
+                                        <p><span id="1week"></span></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="w3layouts-info w3layouts-info2">
+                                    <div class="w3layouts-info-top">
+                                        <h3><span id="2DayTempture">20°c</span></h3>
+                                        <h4><span id="2DayWeatherCondition">Cloudy</span></h4>
+                                        <p>江苏南京</p>
+                                    </div>
+                                    <canvas id="cloudy" width="40" height="40"></canvas>
+                                    <div class="w3layouts-info-bottom">
+                                        <h5><span id="2DayDate">September 25 , 2017</span></h5>
+                                        <p><span id="2week"></span></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="w3layouts-info">
+                                    <div class="w3layouts-info-top">
+                                        <h3><span id="3DayTempture">17°c</span></h3>
+                                        <h4><span id="3DayWeatherCondition">Rainy</span></h4>
+                                        <p>江苏南京</p>
+                                    </div>
+                                    <canvas id="rain" width="40" height="40"></canvas>
+                                    <div class="w3layouts-info-bottom">
+                                        <h5><span id="3DayDate">September 25 , 2017</span></h5>
+                                        <p><span id="3week"></span></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="w3layouts-info w3layouts-info1">
+                                    <div class="w3layouts-info-top">
+                                        <h3><span id="4DayTempture">-5°c</span></h3>
+                                        <h4><span id="4DayWeatherCondition">Snowy</span></h4>
+                                        <p>江苏南京</p>
+                                    </div>
+                                    <canvas id="snow" width="40" height="40"></canvas>
+                                    <div class="w3layouts-info-bottom">
+                                        <h5><span id="4DayDate">September 25 , 2017</span></h5>
+                                        <p><span id="4week"></span></p>
+                                    </div>
+                                </div>
+
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="hub-slider-controls">
+                        <button class="hub-slider-arrow hub-slider-arrow_next">↑</button>
+                        <button class="hub-slider-arrow hub-slider-arrow_prev">↓</button>
+                    </div>
                 </div>
             </div>
+            <!-- copyright -->
+            <div class="copyright">
+                <p> © 2019 Slide Weather Widget . All rights reserved | Design by <a href="http://w3layouts.com/" target="_blank">致一科技</a></p>
+            </div>
         </div>
-        <!-- copyright -->
-        <div class="copyright">
-            <p> © 2019 Slide Weather Widget . All rights reserved | Design by <a href="http://w3layouts.com/" target="_blank">致一科技</a></p>
-        </div>
+
         <!-- //copyright -->
         <script>
             var icons = new Skycons({
@@ -289,6 +309,35 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
             }
         }
+        $("#refresh").rotate({
+            bind: {
+                click: function() {
+                    $(".glyphicon-refresh").rotate({
+                        angle: 0,
+                        animateTo: 360,
+                        callback: function() {
+                            $.ajax({
+                                url: "http://localhost:12305/zhiyi/saveWeather",
+                                type: "get",
+                                success: function(data) {
+                                    bootbox.alert({
+                                        message: "天气资源已更新!",
+                                        size: 'small'
+                                    });
+                                },
+                                error: function() {
+                                    bootbox.alert({
+                                        message: "天气资源获取失败!",
+                                        size: 'small'
+                                    });
+
+                                }
+                            });
+                        }
+                    })
+                }
+            }
+        });
     </script>
 </body>
 
